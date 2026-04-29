@@ -22,14 +22,14 @@ PORT=3000 npm start
 Reverse-proxy with TLS in front (nginx, Caddy, or platform-managed).
 
 ## Health checks
-- `GET /` β†’ 200 HTML.
-- `GET /api/geocode?q=London` β†’ 200 JSON, array length >= 1.
-- `GET /api/weather?lat=51.5074&lon=-0.1278&name=London` β†’ 200 JSON with `current` and 7 `daily` entries.
+- `GET /` → 200 HTML.
+- `GET /api/geocode?q=London` → 200 JSON, array length >= 1.
+- `GET /api/weather?lat=51.5074&lon=-0.1278&name=London` → 200 JSON with `current` and 7 `daily` entries.
 
 ## Common incidents
 
 ### Weather page shows "Couldn't reach weather service"
-1. `curl https://api.open-meteo.com/v1/forecast?latitude=0&longitude=0&current=temperature_2m` from the host. If this fails, Open-Meteo is the issue β€” degraded UX is expected; no action on our side.
+1. `curl https://api.open-meteo.com/v1/forecast?latitude=0&longitude=0&current=temperature_2m` from the host. If this fails, Open-Meteo is the issue — degraded UX is expected; no action on our side.
 2. If only our service is failing, check egress (DNS, firewall) and the 5 s fetch timeout in `lib/openMeteo.ts`.
 
 ### Geocode returns 400 unexpectedly

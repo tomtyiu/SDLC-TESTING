@@ -9,7 +9,7 @@
 | --- | --- | --- |
 | F1 | User can search for a city by name. | Typing 2+ characters in the search box returns up to 5 matching locations within 1 s on a warm cache. |
 | F2 | User can select a city to view its weather. | Selecting a result displays current conditions and a 7-day forecast for that location. |
-| F3 | Current conditions show temperature, apparent temperature, humidity, wind, and a human-readable condition. | The card renders all five fields with correct units (Β°C, %, km/h). |
+| F3 | Current conditions show temperature, apparent temperature, humidity, wind, and a human-readable condition. | The card renders all five fields with correct units (°C, %, km/h). |
 | F4 | Forecast shows daily high/low and condition for the next 7 days. | The list renders 7 day rows including today, ordered ascending by date. |
 | F5 | Errors are surfaced to the user without crashing the page. | Network errors and empty geocode results show a friendly message and let the user retry. |
 | F6 | The page has no client-side API key. | `grep -r OPENMETEO_API_KEY` returns nothing in client bundles; Open-Meteo requires no key. |
