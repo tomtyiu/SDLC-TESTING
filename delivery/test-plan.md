@@ -9,7 +9,7 @@
 | Integration | Vitest + mocked fetch | Route handlers `/api/geocode`, `/api/weather`. |
 | Component | Vitest + Testing Library | `SearchBox` happy path + error path. |
 | Build | `next build` | Production bundle compiles cleanly. |
-| Smoke | Manual `curl` against `next dev` | End-to-end search β†’ weather flow. |
+| Smoke | Manual `curl` against `next dev` | End-to-end search → weather flow. |
 
 ## Requirement coverage
 
@@ -22,7 +22,7 @@
 | F5 error UX | `SearchBox.test.tsx: shows retry on fetch failure` |
 | F6 no client API key | grep check (`lib/openMeteo.ts` is server-only) |
 | S1, S2 input validation | `lib/schemas.test.ts: rejects out-of-range lat/lon` |
-| S3 upstream error mapping | `app/api/weather/route.test.ts: upstream 500 β†’ 502` |
+| S3 upstream error mapping | `app/api/weather/route.test.ts: upstream 500 → 502` |
 | S7 timeout | `lib/openMeteo.test.ts: aborts after configured timeout` |
 
 ## Run

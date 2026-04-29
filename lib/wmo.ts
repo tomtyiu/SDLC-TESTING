@@ -1,6 +1,6 @@
 /**
  * WMO weather interpretation codes used by Open-Meteo.
- * Reference: https://open-meteo.com/en/docs (β€œWeather variable documentation”).
+ * Reference: https://open-meteo.com/en/docs ("Weather variable documentation").
  */
 
 const WMO: Record<number, string> = {
@@ -39,15 +39,15 @@ export function describeWmo(code: number): string {
 }
 
 export function emojiForWmo(code: number, isDay = 1): string {
-  if (code === 0) return isDay ? 'β˜€οΈ' : 'πŸŒ™';
-  if (code === 1 || code === 2) return isDay ? 'πŸŒ€οΈ' : '☁️';
+  if (code === 0) return isDay ? '☀️' : '🌙';
+  if (code === 1 || code === 2) return isDay ? '🌤️' : '☁️';
   if (code === 3) return '☁️';
   if (code === 45 || code === 48) return '🌫️';
-  if (code >= 51 && code <= 57) return 'πŸŒ¦οΈ';
+  if (code >= 51 && code <= 57) return '🌦️';
   if (code >= 61 && code <= 67) return '🌧️';
-  if (code >= 71 && code <= 77) return 'πŸŒ¨οΈ';
-  if (code >= 80 && code <= 82) return 'πŸŒ§οΈ';
-  if (code >= 85 && code <= 86) return 'πŸŒ¨οΈ';
-  if (code >= 95) return 'β›ˆοΈ';
+  if (code >= 71 && code <= 77) return '🌨️';
+  if (code >= 80 && code <= 82) return '🌧️';
+  if (code >= 85 && code <= 86) return '🌨️';
+  if (code >= 95) return '⛈️';
   return '❓';
 }

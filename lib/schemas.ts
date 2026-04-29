@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 /**
  * All inputs from the browser are validated through these schemas before
- * we ever forward them to Open-Meteo or render them. Keep the limits tight β€”
+ * we ever forward them to Open-Meteo or render them. Keep the limits tight —
  * Open-Meteo will accept much more, but we don't need to.
  */
 

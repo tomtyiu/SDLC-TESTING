@@ -3,8 +3,8 @@
 ## Architecture
 
 ```
-[Browser]  ──HTTPS──▢  [Next.js server (route handlers)]  ──HTTPS──▢  [Open-Meteo]
-                            β”‚                                      (geocoding + forecast)
+[Browser]  ──HTTPS──▶  [Next.js server (route handlers)]  ──HTTPS──▶  [Open-Meteo]
+                            │                                      (geocoding + forecast)
                             └── server-rendered React (App Router)
 ```
 
@@ -21,23 +21,23 @@ Single Next.js application. Route handlers under `app/api/*` are the only caller
 | `app/api/weather/route.ts` | Validates `lat`/`lon`/`name`, proxies to Open-Meteo forecast endpoint, normalizes response. |
 | `lib/openMeteo.ts` | Pure server functions: `geocode`, `forecast`. Bounded fetch with timeout. |
 | `lib/schemas.ts` | zod schemas for query validation, response shape parsing. |
-| `lib/wmo.ts` | WMO weather code β†’ human-readable string + icon hint. |
+| `lib/wmo.ts` | WMO weather code → human-readable string + icon hint. |
 
 ## Data flow
 
-1. User types β†’ `SearchBox` debounces 250 ms β†’ `GET /api/geocode?q=<query>`.
+1. User types → `SearchBox` debounces 250 ms → `GET /api/geocode?q=<query>`.
 2. Server validates query, calls `https://geocoding-api.open-meteo.com/v1/search?name=<q>&count=5&language=en&format=json`.
 3. Server returns `[{ id, name, country, lat, lon, admin1 }]`.
-4. User clicks a result β†’ `WeatherDisplay` calls `GET /api/weather?lat=..&lon=..&name=..`.
+4. User clicks a result → `WeatherDisplay` calls `GET /api/weather?lat=..&lon=..&name=..`.
 5. Server validates coords, calls `https://api.open-meteo.com/v1/forecast?latitude=..&longitude=..&current=...&daily=...&timezone=auto`.
 6. Server returns `{ location, current, daily[] }`.
 7. Browser renders.
 
 ## Trust boundaries
 
-- **Browser β†’ our server**: untrusted. Validate every query parameter, length-limit strings, range-check numbers.
-- **Our server β†’ Open-Meteo**: assumed honest but unreliable. Bound the fetch with timeout, treat 5xx as 502 from us, never echo upstream JSON to the user on error.
-- **Our server β†’ browser**: only return the normalized shape we control; we never pass through unmodelled fields.
+- **Browser → our server**: untrusted. Validate every query parameter, length-limit strings, range-check numbers.
+- **Our server → Open-Meteo**: assumed honest but unreliable. Bound the fetch with timeout, treat 5xx as 502 from us, never echo upstream JSON to the user on error.
+- **Our server → browser**: only return the normalized shape we control; we never pass through unmodelled fields.
 
 ## Failure modes
 
@@ -45,9 +45,9 @@ Single Next.js application. Route handlers under `app/api/*` are the only caller
 | --- | --- |
 | Open-Meteo timeout | Server returns 504 with `{ error: "weather_timeout" }`. UI shows "Couldn't reach weather service. Try again." |
 | Open-Meteo 5xx | Server returns 502 with `{ error: "weather_unavailable" }`. UI shows same retry message. |
-| Geocode no results | Server returns 200 with `[]`. UI shows "No matches β€” try a different spelling." |
+| Geocode no results | Server returns 200 with `[]`. UI shows "No matches — try a different spelling." |
 | Invalid query (zod fails) | Server returns 400 with `{ error: "invalid_request" }`. UI hides the dropdown. |
-| Client offline | `fetch` throws β†’ UI shows offline banner. |
+| Client offline | `fetch` throws → UI shows offline banner. |
 
 ## Observability
 
@@ -57,7 +57,7 @@ Single Next.js application. Route handlers under `app/api/*` are the only caller
 
 ## Rollout / rollback
 
-- This is the initial feature β€” no flag required since the previous behavior was a static README.
+- This is the initial feature — no flag required since the previous behavior was a static README.
 - Rollback is `git revert` of the merge commit. There is no schema, no persistent state, no migration.
 - If Open-Meteo becomes unavailable in production, the page degrades gracefully (error card) rather than crashing.
 

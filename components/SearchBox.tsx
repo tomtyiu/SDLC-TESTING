@@ -85,7 +85,7 @@ export default function SearchBox({ onSelect }: Props) {
           role="status"
           className="mt-2 text-xs text-slate-500 dark:text-slate-400"
         >
-          Searchingβ€¦
+          Searching…
         </p>
       ) : null}
       {error ? (
@@ -95,7 +95,7 @@ export default function SearchBox({ onSelect }: Props) {
       ) : null}
       {open && results.length === 0 && !loading && query.trim().length >= 2 ? (
         <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-          No matches β€” try a different spelling.
+          No matches — try a different spelling.
         </p>
       ) : null}
       {open && results.length > 0 ? (
