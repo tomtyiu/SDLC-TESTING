@@ -1,4 +1,5 @@
-# SDLC-test using AI SDLC application
+# Search city with 7 day forecast
+## SDLC-test using AI SDLC application
 
 > As a user I want to view real time weather data for my city so that I can plan my day.
 
