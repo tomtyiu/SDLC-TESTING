@@ -2,7 +2,7 @@
 
 > As a user I want to view real time weather data for my city so that I can plan my day.
 
-A small full-stack Next.js app that lets you search for any city in the world and see current conditions plus a 7-day forecast. Backed by [Open-Meteo](https://open-meteo.com/) β€” no API key, no signup.
+A small full-stack Next.js app that lets you search for any city in the world and see current conditions plus a 7-day forecast. Backed by [Open-Meteo](https://open-meteo.com/) — no API key, no signup.
 
 ## Stack
 
@@ -35,9 +35,9 @@ npm run dev
 ## Architecture
 
 ```
-[Browser]  ──HTTPS──▢  [Next.js routes]  ──HTTPS──▢  [Open-Meteo]
-            β”‚ /api/geocode β†’ city search
-            └─ /api/weather β†’ current + 7-day forecast
+[Browser]  ──HTTPS──▶  [Next.js routes]  ──HTTPS──▶  [Open-Meteo]
+            │ /api/geocode → city search
+            └─ /api/weather → current + 7-day forecast
 ```
 
 See [`delivery/design.md`](./delivery/design.md) for components, data flow, trust boundaries, and rollback strategy.
@@ -46,11 +46,11 @@ See [`delivery/design.md`](./delivery/design.md) for components, data flow, trus
 
 Full delivery artifacts live under [`delivery/`](./delivery/):
 
-- [`requirements.md`](./delivery/requirements.md) β€” what the feature must do, with acceptance criteria.
-- [`design.md`](./delivery/design.md) β€” architecture and security thinking.
-- [`test-plan.md`](./delivery/test-plan.md) β€” validation matrix.
-- [`release-checklist.md`](./delivery/release-checklist.md) β€” pre-merge and post-deploy gates.
-- [`production-runbook.md`](./delivery/production-runbook.md) β€” deploy, verify, observe, roll back.
+- [`requirements.md`](./delivery/requirements.md) — what the feature must do, with acceptance criteria.
+- [`design.md`](./delivery/design.md) — architecture and security thinking.
+- [`test-plan.md`](./delivery/test-plan.md) — validation matrix.
+- [`release-checklist.md`](./delivery/release-checklist.md) — pre-merge and post-deploy gates.
+- [`production-runbook.md`](./delivery/production-runbook.md) — deploy, verify, observe, roll back.
 
 ## Attribution
 
